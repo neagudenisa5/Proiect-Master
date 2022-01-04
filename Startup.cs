@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Proiect.Data;
 using Microsoft.EntityFrameworkCore;
 using Proiect.Hubs;
+using Microsoft.AspNetCore.Identity;
 
 namespace Proiect
 {
@@ -30,6 +31,24 @@ namespace Proiect
             services.AddDbContext<LibraryContext>(options =>
  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSignalR();
+
+            //blocare utilizator dupa autentificare gresita de 2 ori
+            services.Configure<IdentityOptions>(options => {
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 2;
+                options.Lockout.AllowedForNewUsers = true;
+            });
+            //lungime minima parola 7 caractere
+            services.Configure<IdentityOptions>(options => {
+
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 7;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Lockout.AllowedForNewUsers = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +69,7 @@ namespace Proiect
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -58,6 +78,7 @@ namespace Proiect
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapRazorPages();
             });
             
         }
