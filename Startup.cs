@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Proiect.Data;
 using Microsoft.EntityFrameworkCore;
+using Proiect.Hubs;
 
 namespace Proiect
 {
@@ -28,6 +29,7 @@ namespace Proiect
             services.AddControllersWithViews();
             services.AddDbContext<LibraryContext>(options =>
  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +57,9 @@ namespace Proiect
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chathub");
             });
+            
         }
     }
 }

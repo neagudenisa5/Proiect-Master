@@ -20,7 +20,10 @@ namespace Proiect.Controllers
         {
             _context = context;
         }
-       
+        public IActionResult Chat()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
