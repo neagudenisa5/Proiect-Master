@@ -20,6 +20,7 @@ namespace Proiect.Controllers
         {
             _context = context;
         }
+        //chat
         public IActionResult Chat()
         {
             return View();
@@ -29,7 +30,7 @@ namespace Proiect.Controllers
         {
             return View();
         }
-
+        //politica de confidentialitate
         public IActionResult Privacy()
         {
             return View();
@@ -40,6 +41,7 @@ namespace Proiect.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        //statistici despre vanzarea revistelor pe data
         public async Task<ActionResult> Statistics()
         {
             IQueryable<OrderGroup> data =

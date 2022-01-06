@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 namespace Proiect.Hubs
 {
+    //chatul poate fi folosit doar daca clientul este autentificat
     [Authorize]
     public class ChatHub : Hub
     {

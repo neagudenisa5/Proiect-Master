@@ -1,10 +1,10 @@
 ﻿@model Proiect.Models.LibraryViewModels.PublisherIndexData
 @{
-    ViewData["Title"] = "Publishers";
+    ViewData["Title"] = "Magazine";
 }
-<h2>Publishers</h2>
+<h2>Magazine</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Adauga un magazin nou</a>
 </p>
 <table class="table">
     <thead>
@@ -40,10 +40,10 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-action="Index" asp-route-id="@item.ID">Selectare</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ID">Editare</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Detalii</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Stergere</a>
                 </td>
             </tr>
         }
@@ -51,7 +51,7 @@
 </table>
 @if (Model.Books != null)
 {
-    <h3>Books Published by Selected Publisher</h3>
+    <h3>Reviste disponibile in magazinul selectat</h3>
     <table class="table">
         <tr>
             <th></th>
@@ -87,12 +87,12 @@
 @if (Model.Orders != null)
 {
     <h3>
-        Customers that have ordered the Selected Book
+        Cumparatori
     </h3>
     <table class="table">
         <tr>
-            <th>Name</th>
-            <th>Order Date</th>
+            <th>Nume</th>
+            <th>Data comenzii</th>
         </tr>
         @foreach (var item in Model.Orders)
         {

@@ -6,13 +6,15 @@ namespace proiect.Controllers
 {
     public class RolesController : Controller
     {
-        //manager
+        //rol manager
         private RoleManager<IdentityRole> roleManager;
         public RolesController(RoleManager<IdentityRole> roleMgr)
         {
             roleManager = roleMgr;
         }
+        //vizualizare roluri
         public ViewResult Index() => View(roleManager.Roles);
+        //creare rol nou
         public IActionResult Create() => View();
         [HttpPost]
         public async Task<IActionResult> Create([Required] string name)

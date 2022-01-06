@@ -8,6 +8,7 @@ namespace Proiect.Data
 {
     public class DbInitializer
     {
+        //adaugare date in baza de date
             public static void Initialize(LibraryContext context)
             {
                 context.Database.EnsureCreated();

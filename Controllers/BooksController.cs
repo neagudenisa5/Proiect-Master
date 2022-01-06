@@ -11,6 +11,7 @@ using Proiect.Models;
 
 namespace Proiect.Controllers
 {
+    //doar angajatii pot vedea revistele disponibile in cadrul site-ului impreuna cu detalii despre ele
     [Authorize(Policy = "OnlyAngajat")]
     public class BooksController : Controller
     {
@@ -21,7 +22,7 @@ namespace Proiect.Controllers
             _context = context;
         }
 
-        // GET: Books
+        // GET: Reviste
         [AllowAnonymous]
         public async Task<IActionResult> Index(
         string sortOrder,
@@ -67,7 +68,7 @@ namespace Proiect.Controllers
             return View(await PaginatedList<Book>.CreateAsync(books.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-        // GET: Books/Details/5
+        // GET: Detalii revista
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -89,15 +90,14 @@ namespace Proiect.Controllers
             return View(book);
         }
 
-        // GET: Books/Create
+        // GET: Adaugarea unei noi reviste
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Books/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Adaugarea unei noi reviste
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,Author,Price")] Book book)
@@ -120,7 +120,7 @@ namespace Proiect.Controllers
             return View(book);
         }
 
-        // GET: Books/Edit/5
+        // GET: Editarea datelor despre revista
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -136,9 +136,8 @@ namespace Proiect.Controllers
             return View(book);
         }
 
-        // POST: Books/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Editarea datelor despre revista
+        
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(int? id)
@@ -167,7 +166,7 @@ namespace Proiect.Controllers
             return View(studentToUpdate);
         }
 
-        // GET: Books/Delete/5
+        // GET: Stergerea revistei
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -189,7 +188,7 @@ namespace Proiect.Controllers
             return View(book);
         }
 
-        // POST: Books/Delete/5
+        // POST: Stergerea revistei
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

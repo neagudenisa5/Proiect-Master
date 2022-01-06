@@ -52,6 +52,7 @@ namespace Proiect
                     policy.RequireRole("Angajat");
                 });
             });
+            //acces restrictionat, necesita autentificare
             services.ConfigureApplicationCookie(opts =>
             {
                 opts.AccessDeniedPath = "/Identity/Account/AccessDenied";

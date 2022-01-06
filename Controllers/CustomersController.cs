@@ -11,6 +11,7 @@ using Proiect.Models;
 
 namespace Proiect.Controllers
 {
+    //autorizare pentru manageri, doar managerii pot vedea clientii site-ului
     [Authorize(Policy = "OnlyManager")]
     public class CustomersController : Controller
     {

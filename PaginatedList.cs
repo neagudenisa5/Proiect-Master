@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 namespace Proiect
 {
+    //pentru afisarea revistelor in mai multe pagini daca sunt mai mult de 3 pe pagina
     public class PaginatedList<T> : List<T>
     {
         public int PageIndex { get; private set; }
@@ -15,6 +16,7 @@ namespace Proiect
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             this.AddRange(items);
         }
+
         public bool HasPreviousPage
         {
             get
@@ -29,8 +31,7 @@ namespace Proiect
                 return (PageIndex < TotalPages);
             }
         }
-        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex,
-       int pageSize)
+        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex,int pageSize)
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();

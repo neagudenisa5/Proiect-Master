@@ -1,15 +1,20 @@
-﻿@model IEnumerable<Proiect.Models.LibraryViewModels.OrderGroup>
+﻿
+@model IEnumerable<Proiect.Models.LibraryViewModels.OrderGroup>
 @{
     ViewData["Title"] = "Ordered Books Statistics";
 }
+@if (User.IsInRole("OnlyManager"))
+{
+    <p>User is in role <em>role-name</em>.</p>
+
 <h2>Statistici vanzari</h2>
 <table>
     <tr>
         <th>
-            Data comenzii   
+            Data comenzii
         </th>
         <th>
-                Reviste cumparate
+            Reviste cumparate
         </th>
     </tr>
     @foreach (var item in Model)
@@ -19,8 +24,15 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
-                @item.BookCount 
+                @item.BookCount
             </td>
         </tr>
     }
 </table>
+}
+else
+{
+<th>
+    <a href="/Identity/Account/Login">Please login</a>
+</th>
+}

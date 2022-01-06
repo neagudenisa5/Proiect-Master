@@ -1,14 +1,14 @@
 ﻿@model Proiect.Models.Customer
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalii";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalii</h1>
 
 <div>
-    <h4>Customer</h4>
+    <h4>Clienti</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -32,6 +32,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CustomerID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.CustomerID">Editare</a> |
+    <a asp-action="Index">Inapoi la clienti</a>
 </div>

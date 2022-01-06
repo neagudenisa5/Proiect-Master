@@ -19,7 +19,7 @@ namespace Proiect.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("IdentityContextConnection")));
 
-                
+                //necesitatea autentificarii 
                 services.AddDefaultIdentity<IdentityUser>(options =>
                     options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
