@@ -5,7 +5,10 @@ document.getElementById("sendButton").disabled = true;
 connection.on("ReceiveMessage", function (user, message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g,
         "&gt;");
-    var encodedMsg = user + " says " + msg;
+    var today = new Date();
+    var date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
+    var timp = today.getHours() + ':' + today.getMinutes();
+    var encodedMsg = user + " says " + msg + " in data de " + date + " la ora " + timp;
     var li = document.createElement("li");
     li.textContent = encodedMsg;
     document.getElementById("messagesList").appendChild(li);

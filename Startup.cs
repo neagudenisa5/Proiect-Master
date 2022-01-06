@@ -31,14 +31,32 @@ namespace Proiect
             services.AddDbContext<LibraryContext>(options =>
  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSignalR();
+            services.AddRazorPages();
 
             //blocare utilizator dupa autentificare gresita de 2 ori
             services.Configure<IdentityOptions>(options => {
 
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 options.Lockout.MaxFailedAccessAttempts = 2;
                 options.Lockout.AllowedForNewUsers = true;
             });
+            //autorizare pentru manageri
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("OnlyManager", policy => {
+                    policy.RequireRole("Manager");
+                });
+            });
+            //autorizare angajat
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("OnlyAngajat", policy => {
+                    policy.RequireRole("Angajat");
+                });
+            });
+            services.ConfigureApplicationCookie(opts =>
+            {
+                opts.AccessDeniedPath = "/Identity/Account/AccessDenied";
+
+        });
             //lungime minima parola 7 caractere
             services.Configure<IdentityOptions>(options => {
 
